@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heartwood prototype</title>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#FBFAF8;--ink:#28343A;--slate:#5C6B72;--line:#E4E1DB;--terra:#B94A2C;--terra-deep:#8E3820;--tint:#F6E9E4}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#EFEDE8;font-family:'Inter Tight',system-ui,sans-serif;color:var(--ink);min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:14px}
+  h1,h2,h3{font-family:'Cabinet Grotesk';letter-spacing:-0.01em}
+  .note{font-size:13px;color:var(--slate);text-align:center;max-width:340px}
+  .toggle{display:flex;gap:8px}
+  .toggle button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--slate)}
+  .toggle button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .phone{width:375px;max-width:94vw;height:730px;background:var(--paper);border-radius:38px;border:1px solid #DDD9D2;box-shadow:0 24px 60px rgba(40,52,58,.16);overflow:hidden;position:relative}
+  .screen{position:absolute;inset:0;padding:54px 24px 24px;display:none;flex-direction:column;overflow-y:auto}
+  .screen.on{display:flex}
+  .brandrow{display:flex;align-items:center;gap:8px;font-family:'Cabinet Grotesk';font-weight:800;font-size:17px}
+  .rings{width:22px;height:22px}
+  .h{font-size:26px;font-weight:800;line-height:1.1;margin:18px 0 6px}
+  .sub{font-size:14.5px;color:var(--slate);margin-bottom:18px}
+  .chip{border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:9px;cursor:pointer;font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;background:#fff}
+  .chip small{display:block;font-weight:400;color:var(--slate);font-size:12.5px;margin-top:2px}
+  .chip.sel{border-color:var(--terra);background:var(--tint)}
+  .chip .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);flex:none}
+  .chip.sel .dot{background:var(--terra);border-color:var(--terra)}
+  .cta{margin-top:auto;background:var(--terra);color:#fff;border:none;border-radius:999px;padding:16px;font:inherit;font-size:16px;font-weight:600;cursor:pointer;width:100%}
+  .cta:active{transform:scale(.98)}
+  .cta.quiet{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .avatar{width:64px;height:64px;border-radius:50%;background:var(--tint);color:var(--terra-deep);display:flex;align-items:center;justify-content:center;font-family:'Cabinet Grotesk';font-weight:800;font-size:24px}
+  .badge{display:inline-flex;align-items:center;gap:5px;background:#E7F2EC;color:#1F6B47;font-size:11.5px;font-weight:600;border-radius:999px;padding:4px 10px}
+  .tl{border-left:2px solid var(--terra);padding-left:14px;margin:16px 0}
+  .tl div{margin-bottom:12px}
+  .tl b{font-size:14.5px;display:block}
+  .tl span{font-size:12.5px;color:var(--slate)}
+  .quote{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;font-size:14px;color:var(--slate);font-style:italic;margin:8px 0 16px}
+  .prog{display:flex;gap:3px;margin:12px 0 18px}
+  .prog i{flex:1;height:4px;border-radius:2px;background:var(--line)}
+  .prog i.f{background:var(--terra)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+  .card .k{font-size:11.5px;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:5px}
+  .card h3{font-size:17px;margin-bottom:6px}
+  .card p{font-size:13.5px;color:var(--slate)}
+  .ember{display:flex;gap:11px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;margin-bottom:12px}
+  .play{width:38px;height:38px;border-radius:50%;background:var(--tint);color:var(--terra-deep);display:flex;align-items:center;justify-content:center;flex:none;font-size:15px}
+  .ember b{font-size:13.5px;display:block}
+  .ember span{font-size:12.5px;color:var(--slate)}
+  .circle-row{display:flex;align-items:center;gap:10px;margin-top:4px}
+  .faces{display:flex}
+  .faces i{width:26px;height:26px;border-radius:50%;border:2px solid var(--paper);font-style:normal;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-left:-7px}
+  .faces i:first-child{margin-left:0}
+  .wave{display:flex;align-items:center;gap:2px;height:34px;margin:14px 0}
+  .wave i{width:3px;border-radius:2px;background:var(--terra);opacity:.85}
+  .bigq{background:var(--tint);border-radius:16px;padding:18px;font-size:16.5px;line-height:1.5;color:var(--terra-deep);font-style:italic;margin:14px 0}
+  .bigq small{display:block;font-style:normal;font-size:12px;margin-top:10px;color:var(--terra)}
+  .holdbtn{margin-top:auto;background:var(--terra);color:#fff;border:none;border-radius:16px;padding:18px;font:inherit;font-size:16.5px;font-weight:600;cursor:pointer;width:100%;user-select:none}
+  .holdbtn.rec{background:var(--terra-deep)}
+  .meta{font-size:13px;color:var(--slate);display:flex;align-items:center;gap:6px;margin-top:14px;justify-content:center}
+  .back{position:absolute;top:18px;left:20px;background:none;border:none;font:inherit;font-size:13.5px;color:var(--slate);cursor:pointer;z-index:2}
+  .toastwrap{position:absolute;left:0;right:0;bottom:24px;display:flex;justify-content:center;pointer-events:none}
+  .toast{background:var(--ink);color:#fff;font-size:13.5px;padding:10px 18px;border-radius:999px;opacity:0;transition:opacity .3s}
+</style>
+</head>
+<body>
+
+<div class="toggle" role="tablist" aria-label="Choose a side of the app">
+  <button id="tab-maya" class="on" onclick="side('maya')">Maya's side (seeker, 32)</button>
+  <button id="tab-ruth" onclick="side('ruth')">Ruth's side (guide, 71)</button>
+</div>
+
+<div class="phone" id="phone">
+
+  <div class="screen on" id="s1">
+    <div class="brandrow">
+      <svg class="rings" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="none" stroke="#B94A2C" stroke-width="7"/><circle cx="50" cy="50" r="26" fill="none" stroke="#B94A2C" stroke-width="7"/><circle cx="50" cy="50" r="9" fill="#B94A2C"/></svg>
+      Heartwood
+    </div>
+    <div class="h">Which crossing are you in?</div>
+    <div class="sub">We match you with someone who has already crossed it.</div>
+    <div class="chip sel" onclick="pick(this)"><span>New parent<small>First year with a baby</small></span><span class="dot"></span></div>
+    <div class="chip" onclick="pick(this)"><span>Grief<small>Losing someone you love</small></span><span class="dot"></span></div>
+    <div class="chip" onclick="pick(this)"><span>Divorce<small>Ending and starting over</small></span><span class="dot"></span></div>
+    <div class="chip" onclick="pick(this)"><span>Career collapse<small>Layoff or reinvention</small></span><span class="dot"></span></div>
+    <button class="cta" onclick="go('s2')">Begin your crossing</button>
+  </div>
+
+  <div class="screen" id="s2">
+    <button class="back" onclick="go('s1')">&#8592; Back</button>
+    <div class="h" style="margin-top:26px">We found your guide.</div>
+    <div style="display:flex;gap:14px;align-items:center;margin:8px 0 4px">
+      <div class="avatar">R</div>
+      <div>
+        <div style="font-family:'Cabinet Grotesk';font-weight:800;font-size:19px">Ruth, 71</div>
+        <div style="font-size:13px;color:var(--slate)">Retired NICU nurse, raised four</div>
+        <div class="badge" style="margin-top:5px">&#10003; Vetted guide</div>
+      </div>
+    </div>
+    <div class="tl">
+      <div><b>New parent, 1978</b><span>Twins, no sleep, no village</span></div>
+      <div><b>Divorce, 1989</b><span>Single parenthood after</span></div>
+      <div><b>Widowhood, 2019</b><span>And the years since</span></div>
+    </div>
+    <div class="quote">"Nobody tells you the first year is survived, not managed. I can help you survive it."</div>
+    <button class="cta" onclick="go('s3')">Meet Ruth this week</button>
+  </div>
+
+  <div class="screen" id="s3">
+    <div class="brandrow">
+      <svg class="rings" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="none" stroke="#B94A2C" stroke-width="7"/><circle cx="50" cy="50" r="26" fill="none" stroke="#B94A2C" stroke-width="7"/><circle cx="50" cy="50" r="9" fill="#B94A2C"/></svg>
+      Heartwood
+    </div>
+    <div class="h">Your hearth</div>
+    <div class="sub" style="margin-bottom:0">New parent crossing, week 5 of 12</div>
+    <div class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="card">
+      <div class="k">This week's theme</div>
+      <h3>Asking for help without guilt</h3>
+      <p>Ruth &middot; Thursday 7:30pm &middot; voice call</p>
+    </div>
+    <div class="k" style="font-size:11.5px;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin:6px 0 8px">Embers</div>
+    <div class="ember" onclick="go('s4')">
+      <div class="play">&#9654;</div>
+      <div><b>Ruth &middot; voice note &middot; 0:47</b><span>"About that 2am question you sent..."</span></div>
+    </div>
+    <div class="circle-row">
+      <div class="faces">
+        <i style="background:#E1F0E8;color:#1F6B47">J</i>
+        <i style="background:#F6EBD8;color:#8a5a13">A</i>
+        <i style="background:#F6E9E4;color:#8E3820">M</i>
+      </div>
+      <span style="font-size:12.5px;color:var(--slate)">Your circle: 5 parents crossing with you</span>
+    </div>
+    <button class="cta quiet" style="margin-top:auto" onclick="go('s4')">Send Ruth an ember</button>
+  </div>
+
+  <div class="screen" id="s4">
+    <button class="back" onclick="go('s3')">&#8592; Your hearth</button>
+    <div class="h" style="margin-top:26px">Ember to Ruth</div>
+    <div class="sub">It's 2:04am. The baby finally went down. Say what's actually on your mind.</div>
+    <div class="bigq">"How did you know you were doing okay? Because I don't."
+      <small>Your draft, hold below to record</small>
+    </div>
+    <div class="wave" id="wave" aria-hidden="true"></div>
+    <button class="holdbtn" id="hold">Hold to record</button>
+    <div class="meta">Ruth usually replies with morning coffee</div>
+  </div>
+
+  <div class="screen" id="r1">
+    <div class="brandrow">
+      <svg class="rings" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="none" stroke="#B94A2C" stroke-width="7"/><circle cx="50" cy="50" r="26" fill="none" stroke="#B94A2C" stroke-width="7"/><circle cx="50" cy="50" r="9" fill="#B94A2C"/></svg>
+      Heartwood
+    </div>
+    <div class="h" style="font-size:30px;line-height:1.15">Someone needs you, Ruth.</div>
+    <div class="sub" style="font-size:16px">Maya, 32, is in week 5 with her first baby. She sent you a question in the night.</div>
+    <div class="bigq" style="font-size:18px">"How did you know you were doing okay? Because I don't."
+      <small>Voice note &middot; 0:19 &middot; 2:04am</small>
+    </div>
+    <button class="holdbtn" id="rhold">Hold to answer</button>
+    <button class="cta quiet" style="margin-top:10px" onclick="toast('Calling Maya...')">Call Maya instead</button>
+    <div class="meta">
+      <svg width="15" height="15" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="none" stroke="#B94A2C" stroke-width="8"/><circle cx="50" cy="50" r="26" fill="none" stroke="#B94A2C" stroke-width="8"/><circle cx="50" cy="50" r="9" fill="#B94A2C"/></svg>
+      214 hours of being needed this year
+    </div>
+  </div>
+
+  <div class="toastwrap"><div class="toast" id="toast"></div></div>
+</div>
+
+<p class="note">Clickable prototype. Toggle between both sides of the product. Nothing is recorded; every interaction is simulated.</p>
+
+<script>
+  var current = "s1";
+  function go(id){
+    document.getElementById(current).classList.remove("on");
+    document.getElementById(id).classList.add("on");
+    current = id;
+    var ph = document.getElementById("phone");
+    ph.scrollTop = 0;
+  }
+  function side(who){
+    document.getElementById("tab-maya").classList.toggle("on", who==="maya");
+    document.getElementById("tab-ruth").classList.toggle("on", who==="ruth");
+    go(who==="maya" ? "s1" : "r1");
+  }
+  function pick(el){
+    var chips = el.parentElement.querySelectorAll(".chip");
+    chips.forEach(function(c){c.classList.remove("sel")});
+    el.classList.add("sel");
+  }
+  function toast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.opacity = 1;
+    setTimeout(function(){ t.style.opacity = 0; }, 1800);
+  }
+  var w = document.getElementById("wave");
+  for(var i=0;i<44;i++){
+    var bar = document.createElement("i");
+    bar.style.height = (6 + Math.round(Math.abs(Math.sin(i*0.7))*22)) + "px";
+    bar.style.opacity = .25;
+    w.appendChild(bar);
+  }
+  function wireHold(btnId, doneMsg, after){
+    var btn = document.getElementById(btnId);
+    var timer = null, bars = null, n = 0;
+    function start(e){
+      e.preventDefault();
+      btn.classList.add("rec");
+      btn.textContent = "Recording... release to send";
+      if(btnId === "hold"){
+        bars = document.querySelectorAll("#wave i"); n = 0;
+        timer = setInterval(function(){
+          if(bars[n]) bars[n].style.opacity = 1; n++;
+        }, 60);
+      }
+    }
+    function end(){
+      if(!btn.classList.contains("rec")) return;
+      btn.classList.remove("rec");
+      btn.textContent = btnId === "hold" ? "Hold to record" : "Hold to answer";
+      if(timer){ clearInterval(timer); timer = null; }
+      toast(doneMsg);
+      if(after) setTimeout(after, 1400);
+    }
+    btn.addEventListener("mousedown", start);
+    btn.addEventListener("touchstart", start, {passive:false});
+    btn.addEventListener("mouseup", end);
+    btn.addEventListener("mouseleave", end);
+    btn.addEventListener("touchend", end);
+  }
+  wireHold("hold", "Ember sent to Ruth", function(){ go("s3"); });
+  wireHold("rhold", "Answer sent to Maya", null);
+</script>
+</body>
+</html>

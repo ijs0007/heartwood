@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heartwood. Matched with someone who's been there.</title>
+<meta name="description" content="Heartwood pairs people going through life's hardest transitions with vetted guides who have lived through the same one. Join the waitlist.">
+<meta property="og:title" content="Heartwood">
+<meta property="og:description" content="Going through something hard? Get matched with someone who's been there.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='none' stroke='%23B94A2C' stroke-width='7'/><circle cx='50' cy='50' r='26' fill='none' stroke='%23B94A2C' stroke-width='7'/><circle cx='50' cy='50' r='9' fill='%23B94A2C'/></svg>">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF8; --ink:#28343A; --slate:#5C6B72; --line:#E4E1DB;
+    --terra:#B94A2C; --terra-deep:#8E3820; --terra-tint:#F6E9E4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter Tight',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Cabinet Grotesk',system-ui,sans-serif;line-height:1.04;letter-spacing:-0.02em}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;background:rgba(251,250,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Cabinet Grotesk';font-weight:800;font-size:20px;color:var(--ink);text-decoration:none}
+  .rings{width:26px;height:26px}
+  .nav-cta{background:var(--terra);color:#fff;text-decoration:none;padding:9px 18px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .15s ease,background .15s ease}
+  .nav-cta:hover{background:var(--terra-deep)}
+  .nav-cta:active{transform:scale(.98)}
+
+  .hero{padding:72px 0 88px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(38px,5.4vw,64px);font-weight:800}
+  .hero h1 em{font-style:normal;color:var(--terra)}
+  .hero p{margin:22px 0 30px;font-size:19px;color:var(--slate);max-width:34em}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-main{background:var(--terra);color:#fff;text-decoration:none;padding:15px 28px;border-radius:999px;font-weight:600;font-size:16.5px;transition:transform .15s ease,background .15s ease;display:inline-block}
+  .btn-main:hover{background:var(--terra-deep);transform:translateY(-1px)}
+  .btn-main:active{transform:scale(.98)}
+  .btn-quiet{color:var(--ink);text-decoration:none;padding:15px 26px;border-radius:999px;border:1.5px solid var(--ink);font-weight:600;font-size:16.5px;transition:background .15s ease,transform .15s ease;display:inline-block}
+  .btn-quiet:hover{background:var(--ink);color:var(--paper)}
+  .btn-quiet:active{transform:scale(.98)}
+  .hero-img{border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--terra-tint)}
+  .hero-img img{width:100%;height:100%;object-fit:cover}
+
+  .steps{padding:88px 0;border-top:1px solid var(--line)}
+  .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:12.5px;font-weight:600;color:var(--terra)}
+  .steps h2{font-size:clamp(30px,3.6vw,44px);font-weight:800;margin:14px 0 48px;max-width:16em}
+  .step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .step{padding:28px 32px 8px;border-left:1px solid var(--line)}
+  .step:first-child{border-left:none;padding-left:0}
+  .step b{display:block;font-family:'Cabinet Grotesk';font-size:56px;font-weight:800;color:var(--terra-tint);-webkit-text-stroke:1.5px var(--terra);line-height:1}
+  .step h3{font-size:21px;margin:18px 0 10px;font-weight:700}
+  .step p{color:var(--slate);font-size:16px}
+
+  .crossings{padding:88px 0;background:var(--ink);color:var(--paper)}
+  .crossings h2{font-size:clamp(30px,3.6vw,44px);font-weight:800;max-width:17em}
+  .crossings .sub{color:#AEBBC1;margin:16px 0 40px;max-width:36em}
+  .chips{display:flex;flex-wrap:wrap;gap:12px}
+  .chip{border:1.5px solid #46555C;border-radius:999px;padding:12px 22px;font-size:16.5px;color:var(--paper)}
+  .chip.hot{background:var(--terra);border-color:var(--terra);font-weight:600}
+  .chip-note{margin-top:18px;color:#AEBBC1;font-size:14.5px}
+
+  .guides{padding:96px 0}
+  .guides-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:center}
+  .guides-img{border-radius:18px;overflow:hidden;aspect-ratio:3/2;background:var(--terra-tint)}
+  .guides-img img{width:100%;height:100%;object-fit:cover}
+  .guides h2{font-size:clamp(30px,3.6vw,44px);font-weight:800}
+  .guides p{margin:20px 0;color:var(--slate);max-width:32em}
+  .guides ul{list-style:none;margin:26px 0 34px}
+  .guides li{padding:14px 0;border-top:1px solid var(--line);font-size:16.5px;display:flex;gap:12px}
+  .guides li::before{content:"";flex:0 0 8px;height:8px;border-radius:50%;background:var(--terra);margin-top:8px}
+
+  .why{padding:80px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px}
+  .why .stat{font-family:'Cabinet Grotesk';font-size:44px;font-weight:800;color:var(--terra)}
+  .why p{color:var(--slate);font-size:15.5px;margin-top:8px}
+  .why small{display:block;margin-top:10px;color:#98A4AA;font-size:12.5px}
+
+  .join{padding:96px 0}
+  .join-card{max-width:620px;margin:0 auto;text-align:center}
+  .join h2{font-size:clamp(30px,3.6vw,44px);font-weight:800}
+  .join .lead{color:var(--slate);margin:16px 0 36px}
+  form{text-align:left;background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px}
+  .field{margin-bottom:20px}
+  label{display:block;font-weight:600;font-size:14.5px;margin-bottom:7px}
+  input[type=text],input[type=email],select{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:16px;background:var(--paper);color:var(--ink)}
+  input:focus,select:focus{outline:none;border-color:var(--terra)}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .seg input{position:absolute;opacity:0;pointer-events:none}
+  .seg label{border:1.5px solid var(--line);border-radius:10px;padding:14px;text-align:center;cursor:pointer;font-weight:600;font-size:15.5px;margin:0;transition:border-color .15s,background .15s}
+  .seg small{display:block;font-weight:400;color:var(--slate);font-size:13px;margin-top:3px}
+  .seg input:checked + label{border-color:var(--terra);background:var(--terra-tint)}
+  .submit{width:100%;background:var(--terra);color:#fff;border:none;border-radius:999px;padding:16px;font:inherit;font-weight:600;font-size:16.5px;cursor:pointer;transition:background .15s,transform .1s}
+  .submit:hover{background:var(--terra-deep)}
+  .submit:active{transform:scale(.98)}
+  .form-note{font-size:13px;color:#98A4AA;margin-top:14px;text-align:center}
+  .success{display:none;background:var(--terra-tint);border:1.5px solid var(--terra);border-radius:18px;padding:36px;text-align:center}
+  .success h3{font-size:24px;margin-bottom:8px}
+  .success p{color:var(--slate)}
+
+  footer{padding:44px 0;color:var(--slate);font-size:14.5px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  footer a{color:var(--slate)}
+
+  @media(max-width:860px){
+    .hero{padding:48px 0 64px}
+    .hero-grid,.guides-grid{grid-template-columns:1fr;gap:36px}
+    .guides-grid .guides-img{order:-1}
+    .step-grid{grid-template-columns:1fr;gap:8px}
+    .step{border-left:none;border-top:1px solid var(--line);padding:24px 0 8px}
+    .step:first-child{border-top:none;padding-top:0}
+    .why-grid{grid-template-columns:1fr;gap:28px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Heartwood home">
+      <svg class="rings" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="none" stroke="#B94A2C" stroke-width="7"/><circle cx="50" cy="50" r="26" fill="none" stroke="#B94A2C" stroke-width="7"/><circle cx="50" cy="50" r="9" fill="#B94A2C"/></svg>
+      Heartwood
+    </a>
+    <a class="nav-cta" href="#join">Join the waitlist</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Whatever you're going through, someone has <em>been there.</em></h1>
+      <p>Heartwood matches you with a vetted guide who has lived through the exact transition you're facing: a new baby, a divorce, a loss. Twelve weeks. One real conversation a week.</p>
+      <div class="cta-row">
+        <a class="btn-main" href="#join">Join the waitlist</a>
+        <a class="btn-quiet" href="#guides">Guide someone</a>
+      </div>
+    </div>
+    <div class="hero-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GCsCTFMnWhKIUXd6YfWk4Z9G6F/hf_20260712_162327_55b1ad72-7ed6-4f85-9c8f-97df799912f1_min.webp" alt="An older woman and a younger woman talking over coffee at a kitchen table" loading="eager"></div>
+  </div>
+</header>
+
+<section class="steps">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2>A crossing, not an app you scroll.</h2>
+    <div class="step-grid">
+      <div class="step">
+        <b>1</b>
+        <h3>Tell us your crossing</h3>
+        <p>The transition you're in the middle of. That's the only thing we match on, because it's the thing that matters.</p>
+      </div>
+      <div class="step">
+        <b>2</b>
+        <h3>Meet your guide</h3>
+        <p>A background-checked adult, usually 60 or older, who crossed the same river years ago and remembers every stone.</p>
+      </div>
+      <div class="step">
+        <b>3</b>
+        <h3>Talk every week, then pass it on</h3>
+        <p>Twelve weeks of honest conversation, with voice notes between. When you're through it, you can guide the next person.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="crossings">
+  <div class="wrap">
+    <h2>Starting with the year nobody warns you about.</h2>
+    <p class="sub">Our first crossing is the first year of parenthood. More crossings open as guides join the waitlist.</p>
+    <div class="chips">
+      <span class="chip hot">New parent</span>
+      <span class="chip">Grief</span>
+      <span class="chip">Divorce</span>
+      <span class="chip">Diagnosis</span>
+      <span class="chip">Caregiving</span>
+      <span class="chip">Career collapse</span>
+      <span class="chip">Retirement</span>
+    </div>
+    <p class="chip-note">Not therapy, and not a replacement for it. Guides are people who have been there, with clear paths to professional help when it's needed.</p>
+  </div>
+</section>
+
+<section class="guides" id="guides">
+  <div class="wrap guides-grid">
+    <div class="guides-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GCsCTFMnWhKIUXd6YfWk4Z9G6F/hf_20260712_162329_8de4f11b-9925-4d5c-a0d7-f35dbc7f89da_min.webp" alt="An older man's hands teaching a younger man's hands to repair a chair at a workbench" loading="lazy"></div>
+    <div>
+      <h2>Raised four kids? Survived the worst year of your life? That's a credential.</h2>
+      <p>Guides are adults, usually 60 and up, who give one hour a week to someone in the thick of what they once survived. No degree required. Your life is the qualification.</p>
+      <ul>
+        <li>One hour a week, from your kitchen table, on your schedule.</li>
+        <li>We verify every guide and every seeker, and early conversations stay on the platform.</li>
+        <li>You choose the crossing you guide. You've already earned it.</li>
+      </ul>
+      <a class="btn-main" href="#join">Join the waitlist</a>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="why-grid">
+      <div>
+        <div class="stat">17%</div>
+        <p>of Americans now say they have no close friends. In 1990 it was 3 percent.</p>
+        <small>Survey Center on American Life</small>
+      </div>
+      <div>
+        <div class="stat">871,000</div>
+        <p>deaths a year are linked to loneliness worldwide. It is a health crisis, not a mood.</p>
+        <small>World Health Organization, 2025</small>
+      </div>
+      <div>
+        <div class="stat">94%</div>
+        <p>of weekly elder-to-youth mentor matches keep talking, week after week. The bond holds.</p>
+        <small>Eldera platform data</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap join-card">
+    <span class="eyebrow">Early access</span>
+    <h2>Be first across.</h2>
+    <p class="lead">We're opening the first crossing soon, city by city. Tell us who you are and we'll hold your place.</p>
+    <form id="waitlist" novalidate>
+      <div class="field seg-wrap">
+        <label>I want to</label>
+        <div class="seg">
+          <input type="radio" name="side" id="side-seeker" value="Find a guide" checked>
+          <label for="side-seeker">Find a guide<small>I'm going through something</small></label>
+          <input type="radio" name="side" id="side-guide" value="Become a guide">
+          <label for="side-guide">Become a guide<small>I've been there, I can help</small></label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="name">First name</label>
+        <input type="text" id="name" name="name" placeholder="Maya" autocomplete="given-name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="maya@example.com" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="crossing">Your crossing</label>
+        <select id="crossing" name="crossing">
+          <option>New parent</option>
+          <option>Grief</option>
+          <option>Divorce</option>
+          <option>Diagnosis</option>
+          <option>Caregiving</option>
+          <option>Career collapse</option>
+          <option>Retirement</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <button class="submit" type="submit">Join the waitlist</button>
+      <p class="form-note">No spam. One email when your crossing opens.</p>
+    </form>
+    <div class="success" id="success">
+      <h3>You're on the list.</h3>
+      <p>We'll write to you when your crossing opens. It means a lot that you're here.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>Heartwood. The oldest human institution, rebuilt.</span>
+    <a href="mailto:isaiahsmith0007@gmail.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+  var FORM_ENDPOINT = "";
+  var FORM_FIELDS = { side: "", name: "", email: "", crossing: "" };
+  var FALLBACK_EMAIL = "isaiahsmith0007@gmail.com";
+
+  document.getElementById("waitlist").addEventListener("submit", function(e){
+    e.preventDefault();
+    var f = e.target;
+    var name = f.name.value.trim();
+    var email = f.email.value.trim();
+    if(!name || !email || email.indexOf("@") < 0){
+      alert("Please add your first name and a valid email.");
+      return;
+    }
+    var side = f.querySelector("input[name=side]:checked").value;
+    var crossing = f.crossing.value;
+
+    if(FORM_ENDPOINT){
+      var data = new FormData();
+      data.append(FORM_FIELDS.side, side);
+      data.append(FORM_FIELDS.name, name);
+      data.append(FORM_FIELDS.email, email);
+      data.append(FORM_FIELDS.crossing, crossing);
+      fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: data })
+        .finally(showSuccess);
+    } else {
+      var subject = encodeURIComponent("Heartwood waitlist: " + name);
+      var body = encodeURIComponent(
+        "Add me to the Heartwood waitlist.\n\nName: " + name +
+        "\nEmail: " + email + "\nI want to: " + side +
+        "\nCrossing: " + crossing);
+      window.location.href = "mailto:" + FALLBACK_EMAIL + "?subject=" + subject + "&body=" + body;
+      showSuccess();
+    }
+
+    function showSuccess(){
+      f.style.display = "none";
+      document.getElementById("success").style.display = "block";
+    }
+  });
+</script>
+</body>
+</html>
