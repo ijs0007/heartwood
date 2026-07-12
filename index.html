@@ -276,8 +276,7 @@
 </footer>
 
 <script>
-  var FORM_ENDPOINT = "";
-  var FORM_FIELDS = { side: "", name: "", email: "", crossing: "" };
+  var FORM_ENDPOINT = "https://formspree.io/f/meeyjwnk";
   var FALLBACK_EMAIL = "isaiahsmith0007@gmail.com";
 
   document.getElementById("waitlist").addEventListener("submit", function(e){
@@ -294,13 +293,22 @@
 
     if(FORM_ENDPOINT){
       var data = new FormData();
-      data.append(FORM_FIELDS.side, side);
-      data.append(FORM_FIELDS.name, name);
-      data.append(FORM_FIELDS.email, email);
-      data.append(FORM_FIELDS.crossing, crossing);
-      fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: data })
-        .finally(showSuccess);
+      data.append("side", side);
+      data.append("name", name);
+      data.append("email", email);
+      data.append("crossing", crossing);
+      data.append("_subject", "New Heartwood waitlist signup: " + name);
+      fetch(FORM_ENDPOINT, { method: "POST", body: data, headers: { "Accept": "application/json" } })
+        .then(function(r){
+          if(r.ok){ showSuccess(); }
+          else { mailtoFallback(); }
+        })
+        .catch(mailtoFallback);
     } else {
+      mailtoFallback();
+    }
+
+    function mailtoFallback(){
       var subject = encodeURIComponent("Heartwood waitlist: " + name);
       var body = encodeURIComponent(
         "Add me to the Heartwood waitlist.\n\nName: " + name +
