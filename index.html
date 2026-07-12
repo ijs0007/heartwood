@@ -97,6 +97,9 @@
   .submit{width:100%;background:var(--terra);color:#fff;border:none;border-radius:999px;padding:16px;font:inherit;font-weight:600;font-size:16.5px;cursor:pointer;transition:background .15s,transform .1s}
   .submit:hover{background:var(--terra-deep)}
   .submit:active{transform:scale(.98)}
+  .submit:disabled{opacity:.8;cursor:default;transform:none}
+  .spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;margin-right:9px;vertical-align:-3px;animation:hwspin .7s linear infinite}
+  @keyframes hwspin{to{transform:rotate(360deg)}}
   .form-note{font-size:13px;color:#98A4AA;margin-top:14px;text-align:center}
   .success{display:none;background:var(--terra-tint);border:1.5px solid var(--terra);border-radius:18px;padding:36px;text-align:center}
   .success h3{font-size:24px;margin-bottom:8px}
@@ -290,6 +293,9 @@
     }
     var side = f.querySelector("input[name=side]:checked").value;
     var crossing = f.crossing.value;
+    var btn = f.querySelector(".submit");
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin" aria-hidden="true"></span>Adding you...';
 
     if(FORM_ENDPOINT){
       var data = new FormData();
